@@ -83,7 +83,7 @@ where extract(year from age(now())) -EXTRACT (YEAR FROM AGE(date_added::date)) <
 
 
 
---7. Find all the movies/TV shows by director 'Rajiv Chilaka'!
+--7. Find all the movies/TV shows by director 'Mike Flanagan'!
 select *
 from netflix
 where director = 'Mike Flanagan'
@@ -114,7 +114,7 @@ from netflix
 
 
 
---10.Find each year and the average numbers of content release in India on netflix. 
+--10.Find each year and the average numbers of content release in Germany on netflix. 
 --return top 5 year with highest avg content release!
 with cte as (select *, rank() over(order by average_release desc) 
 from (
@@ -150,7 +150,7 @@ where director is null
 
 
 
---13. Find how many movies actor 'Salman Khan' appeared in last 10 years.
+--13. Find how many movies actor 'Mia Goth' appeared in last 10 years.
 select count(*)
 from netflix
 where casts like '%Mia Goth%' and extract(year from age(now())) - release_year <=10
@@ -158,7 +158,7 @@ where casts like '%Mia Goth%' and extract(year from age(now())) - release_year <
 
 
 
---14. Find the top 10 actors who have appeared in the highest number of movies produced in India.
+--14. Find the top 10 actors who have appeared in the highest number of movies produced in United Kingdom.
 select *
 from (select distinct actor_in_Indmov, starred_amount, rank() over(order by starred_amount desc) from (
 with cte as(select unnest(string_to_array(casts, ', ')) as actor_in_Indmov
